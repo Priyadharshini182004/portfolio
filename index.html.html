@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Priyadharshini N | Portfolio</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100%; font-family: 'Outfit', sans-serif; }
+        
+        :root {
+            --bg: #0f0f0f;
+            --surface: #1a1a2e;
+            --text: #e8e8e8;
+            --primary: #6c63ff;
+            --secondary: #00d4aa;
+        }
+        .light-mode {
+            --bg: #f8f9fa;
+            --surface: #ffffff;
+            --text: #1a1a2e;
+            --primary: #6c63ff;
+            --secondary: #00b894;
+        }
+        body { background: var(--bg); color: var(--text); transition: all 0.4s ease; }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card {
+            background: var(--surface);
+            border: 1px solid rgba(108, 99, 255, 0.15);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+        .card:hover { transform: translateY(-4px); border-color: var(--primary); box-shadow: 0 8px 32px rgba(108, 99, 255, 0.15); }
+        
+        .nav-link { position: relative; padding: 8px 16px; border-radius: 8px; transition: all 0.3s; }
+        .nav-link:hover { background: rgba(108, 99, 255, 0.1); }
+        .nav-link.active { background: var(--primary); color: white; }
+        
+        .skill-tag {
+            background: rgba(108, 99, 255, 0.1);
+            border: 1px solid rgba(108, 99, 255, 0.3);
+            padding: 8px 16px;
+            border-radius: 24px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .skill-tag:hover { background: var(--primary); color: white; transform: scale(1.05); }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), #8b5cf6);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 12px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(108, 99, 255, 0.4); }
+        
+        .timeline-line { width: 2px; background: linear-gradient(to bottom, var(--primary), var(--secondary)); }
+        .timeline-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--primary); border: 3px solid var(--bg); }
+        
+        section { scroll-margin-top: 80px; }
+        
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-in { animation: fadeUp 0.6s ease forwards; }
+        
+        .hero-blob {
+            position: absolute;
+            width: 300px; height: 300px;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+        }
+        
+        @media (max-width: 768px) {
+            .desktop-nav { display: none; }
+            .mobile-menu-btn { display: block !important; }
+        }
+        @media (min-width: 769px) {
+            .mobile-menu-btn { display: none !important; }
+            .mobile-nav { display: none !important; }
+        }
+    </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full overflow-auto">
+  <div id="app" class="w-full h-full">
+   <!-- Navigation -->
+   <nav id="navbar" style="background: var(--surface); border-bottom: 1px solid rgba(108,99,255,0.1);" class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-opacity-90">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+     <a href="#home" class="text-xl font-bold gradient-text">PN</a>
+     <div class="desktop-nav flex items-center gap-2">
+      <a href="#home" class="nav-link active" data-nav>Home</a> <a href="#about" class="nav-link" data-nav>About</a> <a href="#skills" class="nav-link" data-nav>Skills</a> <a href="#experience" class="nav-link" data-nav>Experience</a> <a href="#projects" class="nav-link" data-nav>Projects</a> <a href="#education" class="nav-link" data-nav>Education</a> <a href="#contact" class="nav-link" data-nav>Contact</a>
+     </div>
+     <div class="flex items-center gap-3">
+      <button id="themeToggle" class="p-2 rounded-lg hover:bg-gray-700/30 transition"> <i data-lucide="moon" id="themeIcon" style="width:20px;height:20px;"></i> </button> <button class="mobile-menu-btn p-2 rounded-lg hover:bg-gray-700/30" onclick="toggleMobileNav()"> <i data-lucide="menu" style="width:20px;height:20px;"></i> </button>
+     </div>
+    </div>
+    <div class="mobile-nav hidden px-4 pb-4 flex-col gap-2">
+     <a href="#home" class="nav-link block" data-nav onclick="closeMobileNav()">Home</a> <a href="#about" class="nav-link block" data-nav onclick="closeMobileNav()">About</a> <a href="#skills" class="nav-link block" data-nav onclick="closeMobileNav()">Skills</a> <a href="#experience" class="nav-link block" data-nav onclick="closeMobileNav()">Experience</a> <a href="#projects" class="nav-link block" data-nav onclick="closeMobileNav()">Projects</a> <a href="#education" class="nav-link block" data-nav onclick="closeMobileNav()">Education</a> <a href="#contact" class="nav-link block" data-nav onclick="closeMobileNav()">Contact</a>
+    </div>
+   </nav><!-- Hero Section -->
+   <section id="home" class="relative min-h-full flex items-center justify-center px-4 pt-20">
+    <div class="hero-blob" style="background: var(--primary); top: 20%; left: 10%;"></div>
+    <div class="hero-blob" style="background: var(--secondary); bottom: 20%; right: 10%;"></div>
+    <div class="text-center relative z-10 animate-in">
+     <p class="text-lg mb-2 opacity-70">Hello, I'm</p>
+     <h1 id="heroName" class="text-5xl md:text-7xl font-800 gradient-text mb-4">Priyadharshini N</h1>
+     <p class="text-xl md:text-2xl opacity-80 mb-2"> Java | Frontend Developer</p>
+     <p class="max-w-lg mx-auto opacity-60 mb-8">B.E. Computer Science Graduate | Java | Frontend Development</p>
+     <div class="flex flex-wrap justify-center gap-4">
+      <a href="#contact" class="btn-primary"><i data-lucide="mail" style="width:18px;height:18px;"></i> Contact Me</a> <a href="#resume" class="btn-primary" style="background: rgba(108,99,255,0.15); color: var(--primary);"><i data-lucide="download" style="width:18px;height:18px;"></i> Resume</a>
+     </div>
+     <div class="flex justify-center gap-4 mt-8">
+      <a href="https://www.linkedin.com/in/priya-dharshini-05b9902a2/" target="_blank" rel="noopener noreferrer" class="p-3 rounded-full hover:bg-gray-700/30 transition"><i data-lucide="linkedin" style="width:22px;height:22px;"></i></a> <a href="https://www.hackerrank.com/profile/priyoo182004" target="_blank" rel="noopener noreferrer" class="p-3 rounded-full hover:bg-gray-700/30 transition"><i data-lucide="code-2" style="width:22px;height:22px;"></i></a>
+     </div>
+    </div>
+   </section><!-- About -->
+   <section id="about" class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+     <h2 class="text-3xl font-bold gradient-text mb-8 text-center">About Me</h2>
+     <div class="card">
+      <p id="aboutText" class="text-lg leading-relaxed opacity-80">Goal-driven B.E. CSE graduate seeking an entry-level Java and Frontend Developer role to leverage core technical knowledge, logical reasoning, and teamwork abilities in a dynamic IT organization. Passionate about full-stack development with expertise in Java, SQL, and frontend technologies.</p>
+     </div>
+    </div>
+   </section><!-- Skills -->
+   <section id="skills" class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+     <h2 class="text-3xl font-bold gradient-text mb-8 text-center">Skills</h2>
+     <div class="grid md:grid-cols-2 gap-6">
+      <div class="card">
+       <h3 class="text-xl font-semibold mb-4 flex items-center gap-2"><i data-lucide="code" style="width:20px;height:20px;color:var(--primary)"></i> Technical Skills</h3>
+       <div class="flex flex-wrap gap-2">
+        <span class="skill-tag">Java</span> <span class="skill-tag">OOPs</span>  <span class="skill-tag">SQL</span> <span class="skill-tag">HTML</span> <span class="skill-tag">CSS</span> <span class="skill-tag">JavaScript</span>
+       </div>
+      </div>
+      <div class="card">
+       <h3 class="text-xl font-semibold mb-4 flex items-center gap-2"><i data-lucide="users" style="width:20px;height:20px;color:var(--secondary)"></i> Soft Skills</h3>
+       <div class="flex flex-wrap gap-2">
+        <span class="skill-tag">Decision Making</span> <span class="skill-tag">Responsibility</span> <span class="skill-tag">Team Work</span> <span class="skill-tag">Problem Solving</span> <span class="skill-tag">Communication</span>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Experience -->
+   <section id="experience" class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+     <h2 class="text-3xl font-bold gradient-text mb-8 text-center">Experience</h2>
+     <div class="space-y-6">
+      <div class="card flex gap-4">
+       <div class="flex flex-col items-center">
+        <div class="timeline-dot"></div>
+        <div class="timeline-line flex-1 mt-2"></div>
+       </div>
+       <div>
+        <h3 class="text-lg font-semibold">Full Stack Developer Intern</h3>
+        <p style="color:var(--primary)" class="font-medium">8 Queens Web Technologies Pvt. Ltd.</p>
+        <p class="opacity-60 text-sm">2025 • 1 Month</p>
+       </div>
+      </div>
+      <div class="card flex gap-4">
+       <div class="flex flex-col items-center">
+        <div class="timeline-dot"></div>
+       </div>
+       <div>
+        <h3 class="text-lg font-semibold">Java Full Stack Development</h3>
+        <p style="color:var(--primary)" class="font-medium">QSpiders Training Institute, Chennai</p>
+        <p class="opacity-60 text-sm">Jan 2026 – Apr 2026</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Projects -->
+   <section id="projects" class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+     <h2 class="text-3xl font-bold gradient-text mb-8 text-center">Projects</h2>
+     <div class="grid md:grid-cols-2 gap-6">
+      <div class="card">
+       <div class="flex items-center gap-2 mb-3"><i data-lucide="image" style="width:24px;height:24px;color:var(--primary)"></i>
+        <h3 class="text-lg font-semibold">Image Compression Model</h3>
+       </div>
+       <p class="opacity-70 text-sm">Developed an Image Compression Model using CNN to minimize storage requirements. Ensured high image quality retention through efficient reconstruction techniques.</p>
+       <div class="flex gap-2 mt-3 flex-wrap"><span class="skill-tag text-xs">CNN</span><span class="skill-tag text-xs">Deep Learning</span><span class="skill-tag text-xs">Python</span>
+       </div>
+      </div>
+      <div class="card">
+       <div class="flex items-center gap-2 mb-3"><i data-lucide="shield-check" style="width:24px;height:24px;color:var(--secondary)"></i>
+        <h3 class="text-lg font-semibold">Deep Fake Detection System</h3>
+       </div>
+       <p class="opacity-70 text-sm">Developed a Deep Fake Detection System for Image and Video Analysis using AI and ML techniques to identify manipulated media content. Real-time analysis for content authenticity and security.</p>
+       <div class="flex gap-2 mt-3 flex-wrap"><span class="skill-tag text-xs">AI/ML</span><span class="skill-tag text-xs">Computer Vision</span><span class="skill-tag text-xs">Python</span>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Education -->
+   <section id="education" class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+     <h2 class="text-3xl font-bold gradient-text mb-8 text-center">Education</h2>
+     <div class="space-y-4">
+      <div class="card">
+       <h3 class="text-lg font-semibold">B.E. Computer Science and Engineering</h3>
+       <p style="color:var(--primary)">University College of Engineering Arni, Thatchur</p>
+       <p class="opacity-60 text-sm">2022 – 2026 | CGPA: 8.2</p>
+      </div>
+      <div class="card">
+       <h3 class="text-lg font-semibold">Higher Secondary (Class XII)</h3>
+       <p style="color:var(--primary)">Sri Ragavendra Matric Hr. Sec. School, Kasthambadi</p>
+       <p class="opacity-60 text-sm">2021 – 2022 | Percentage: 86.5%</p>
+      </div>
+      <div class="card">
+       <h3 class="text-lg font-semibold">Secondary School (Class X)</h3>
+       <p style="color:var(--primary)">Sri Ragavendra Matric Hr. Sec. School, Kasthambadi</p>
+       <p class="opacity-60 text-sm">2019 – 2020 | Percentage: 92.8%</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- Workshops -->
+   <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+     <h2 class="text-3xl font-bold gradient-text mb-8 text-center">Workshops</h2>
+     <div class="card">
+      <div class="flex items-center gap-2 mb-2"><i data-lucide="award" style="width:20px;height:20px;color:var(--primary)"></i>
+       <h3 class="font-semibold">Building DApps on Ethereum Blockchain</h3>
+      </div>
+      <p class="opacity-60 text-sm">University College of Engineering Arani, 2024</p>
+     </div>
+    </div>
+   </section><!-- Resume Download -->
+   <section id="resume" class="py-20 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+     <h2 class="text-3xl font-bold gradient-text mb-4">Resume</h2>
+     <p class="opacity-60 mb-8">Download my latest resume</p><button onclick="downloadResume()" class="btn-primary text-lg"><i data-lucide="download" style="width:20px;height:20px;"></i> Download Resume</button>
+    </div>
+   </section><!-- Contact -->
+   <section id="contact" class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+     <h2 class="text-3xl font-bold gradient-text mb-8 text-center">Get In Touch</h2>
+     <div class="grid md:grid-cols-3 gap-4">
+      <div class="card text-center">
+       <i data-lucide="phone" style="width:28px;height:28px;color:var(--primary);margin:0 auto 12px;"></i>
+       <p class="font-medium">Phone</p>
+       <p class="opacity-60 text-sm">+91 9384507515</p>
+      </div>
+      <div class="card text-center">
+       <i data-lucide="map-pin" style="width:28px;height:28px;color:var(--primary);margin:0 auto 12px;"></i>
+       <p class="font-medium">Location</p>
+       <p class="opacity-60 text-sm">439 Ambedkar Street, Kilpet, Tiruvannamalai</p>
+      </div><a href="https://www.linkedin.com/in/priya-dharshini-05b9902a2/" target="_blank" rel="noopener noreferrer" class="card text-center"> <i data-lucide="linkedin" style="width:28px;height:28px;color:var(--primary);margin:0 auto 12px;"></i> <p class="font-medium">LinkedIn</p><p class="opacity-60 text-sm">priyadharshini</p></a>
+     </div>
+    </div>
+   </section><!-- Footer -->
+   <footer style="background:var(--surface);border-top:1px solid rgba(108,99,255,0.1)" class="py-6 px-4 text-center">
+    <p class="opacity-60 text-sm">© 2025 Priyadharshini N. All rights reserved.</p>
+   </footer>
+  </div>
+  <script>
+        // Theme toggle
+        let isDark = true;
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            isDark = !isDark;
+            document.body.classList.toggle('light-mode');
+            document.getElementById('themeIcon').setAttribute('data-lucide', isDark ? 'moon' : 'sun');
+            lucide.createIcons();
+        });
+
+        // Mobile nav
+        function toggleMobileNav() {
+            document.querySelector('.mobile-nav').classList.toggle('hidden');
+        }
+        function closeMobileNav() {
+            document.querySelector('.mobile-nav').classList.add('hidden');
+        }
+
+        // Active nav
+        document.querySelectorAll('[data-nav]').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelectorAll('[data-nav]').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Resume download
+        function downloadResume() {
+            const content = `PRIYADHARSHINI N
++91 9384507515 | 439 Ambedkar Street, Kilpet, Tiruvannamalai District
+LinkedIn: https://www.linkedin.com/in/priya-dharshini-05b9902a2/
+HackerRank: https://www.hackerrank.com/profile/priyoo182004
+
+CAREER OBJECTIVES
+Aspiring Frontend Developer seeking an entry-level role to leverage expertise in Java, HTML, CSS, and JavaScript. Goal-driven B.E. CSE graduate committed to building responsive web applications and delivering exceptional user experiences through clean, efficient code.
+
+EDUCATIONAL QUALIFICATION
+B.E. Computer Science and Engineering with Minor
+University College of Engineering Arni, Thatchur, Tiruvannamalai Dist.
+Year Of Passing: 2022 - 2026 | CGPA: 8.2
+
+Higher Secondary (Class XII)
+Sri Ragavendra Matric Hr. Sec. School, Kasthambadi, 606903, Tiruvannamalai Dist.
+Year Of Passing: 2021 - 2022 | Percentage: 86.5%
+
+Secondary School (Class X)
+Sri Ragavendra Matric Hr. Sec. School, Kasthambadi, 606903, Tiruvannamalai Dist.
+Year Of Passing: 2019 - 2020 | Percentage: 92.8%
+
+TECHNICAL SKILLS
+Programming Language: Java
+Frontend: HTML, CSS, JavaScript
+OOPs Concept, Data Structures
+Database Management: SQL
+
+SOFT SKILLS
+Decision Making | Responsibility | Team Work | Problem Solving | Communication
+
+INTERNSHIP
+Full Stack Developer Internship - 8 Queens Web Technologies Pvt. Ltd. [2025] (1 Month)
+Java Full Stack Development - QSpiders Training Institute, Chennai [Jan 2026 - Apr 2026]
+
+PROJECTS
+1. Image Compression Model using CNN
+   Developed to minimize storage requirements with high image quality retention through efficient reconstruction techniques.
+
+2. Deep Fake Detection System for Image and Video Analysis
+   Using AI and machine learning techniques to identify manipulated media content. Real-time analysis for content authenticity, security, and fake media detection accuracy.
+
+WORKSHOPS
+Building DApps on Ethereum Blockchain - University College of Engineering Arani [2024]`;
+
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Priyadharshini_N_Resume.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        lucide.createIcons();
+
+        // Element SDK
+        const defaultConfig = {
+            hero_title: 'Priyadharshini N',
+            about_text: 'Goal-driven B.E. CSE graduate seeking an entry-level Technical Support Engineer role to leverage core technical knowledge, logical reasoning, and teamwork abilities in a dynamic IT organization. Passionate about full-stack development with expertise in Java, SQL, and frontend technologies.',
+            background_color: '#0f0f0f',
+            surface_color: '#1a1a2e',
+            text_color: '#e8e8e8',
+            primary_color: '#6c63ff',
+            secondary_color: '#00d4aa',
+            font_family: 'Outfit',
+            font_size: 16
+        };
+
+        window.elementSdk.init({
+            defaultConfig,
+            onConfigChange: async (config) => {
+                document.getElementById('heroName').textContent = config.hero_title || defaultConfig.hero_title;
+                document.getElementById('aboutText').textContent = config.about_text || defaultConfig.about_text;
+                const root = document.documentElement;
+                root.style.setProperty('--bg', config.background_color || defaultConfig.background_color);
+                root.style.setProperty('--surface', config.surface_color || defaultConfig.surface_color);
+                root.style.setProperty('--text', config.text_color || defaultConfig.text_color);
+                root.style.setProperty('--primary', config.primary_color || defaultConfig.primary_color);
+                root.style.setProperty('--secondary', config.secondary_color || defaultConfig.secondary_color);
+                document.body.style.fontFamily = `${config.font_family || defaultConfig.font_family}, sans-serif`;
+                document.body.style.fontSize = `${config.font_size || defaultConfig.font_size}px`;
+            },
+            mapToCapabilities: (config) => ({
+                recolorables: [
+                    { get: () => config.background_color || defaultConfig.background_color, set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
+                    { get: () => config.surface_color || defaultConfig.surface_color, set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
+                    { get: () => config.text_color || defaultConfig.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
+                    { get: () => config.primary_color || defaultConfig.primary_color, set: (v) => { config.primary_color = v; window.elementSdk.setConfig({ primary_color: v }); } },
+                    { get: () => config.secondary_color || defaultConfig.secondary_color, set: (v) => { config.secondary_color = v; window.elementSdk.setConfig({ secondary_color: v }); } }
+                ],
+                borderables: [],
+                fontEditable: { get: () => config.font_family || defaultConfig.font_family, set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); } },
+                fontSizeable: { get: () => config.font_size || defaultConfig.font_size, set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); } }
+            }),
+            mapToEditPanelValues: (config) => new Map([
+                ['hero_title', config.hero_title || defaultConfig.hero_title],
+                ['about_text', config.about_text || defaultConfig.about_text]
+            ])
+        });
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ff53bdec5f10b22',t:'MTc3OTM4MzgzOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
